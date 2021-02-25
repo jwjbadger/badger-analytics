@@ -32,8 +32,16 @@ The goal of feature scaling is to compress data so that certain data analysis al
 
 ### Standardization
 
-This method of feature scaling is accessible via `processing.standardization(input_set)`
+This method of feature scaling is accessible via `processing.feature_scaling.standardization(input_set)`
 
 It returns the z score of each value in a list or matrix. The z score represents the distance in standard deviations from the mean.
 
 Given a 2D NumPy array with more than 1 row, this function will return the z scores of the inputed data set's numerical values. The result will be a NumPy array.
+
+### Normalization
+
+Normalization is a type of feature scaling that is accessible via `processing.feature_scaling.normalization(input_set)`
+
+It returns the value of the number scaled down between 0 and 1 in respect to the minimum and maximum.
+
+Given a 2D NumPy array with more than 1 row, this function will return the scaled down version of the inputed data set's numerical values. The result will be a NumPy array.

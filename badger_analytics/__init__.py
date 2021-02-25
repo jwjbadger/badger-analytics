@@ -1,2 +1,2 @@
-from . import data_import
+import data_import
 import main
