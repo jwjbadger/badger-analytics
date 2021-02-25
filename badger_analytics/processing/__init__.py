@@ -1,1 +1,1 @@
-from . import standardization
+from . import feature_scaling

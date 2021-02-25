@@ -26,12 +26,14 @@ This function is exactly the same as `data_import.local_import()` except the pat
 
 Before any analytical proceses can be performed, the data may have to be cleaned up.
 
-## Standardization
+## Feature Scaling
 
-The goal of standardization is to compress data into a specific range.
+The goal of feature scaling is to compress data so that certain data analysis algorythms will work better.
 
-### Z Score
+### Standardization
 
-This method of standardization is accessible via `processing.standardization.z_score(input_set)`
+This method of feature scaling is accessible via `processing.standardization(input_set)`
+
+It returns the z score of each value in a list or matrix. The z score represents the distance in standard deviations from the mean.
 
 Given a 2D NumPy array with more than 1 row, this function will return the z scores of the inputed data set's numerical values. The result will be a NumPy array.
