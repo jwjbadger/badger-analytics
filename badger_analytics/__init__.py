@@ -1,2 +1,2 @@
-import data_import
-import main
+from . import data_import
+from . import main
