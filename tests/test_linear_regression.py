@@ -1,4 +1,3 @@
-from banalytics.regression.linear import generate, squared_error
 from banalytics.regression.linear import *
 import numpy as np
 
@@ -22,3 +21,16 @@ class TestLinearRegression:
         y = np.array([[2], [5], [6], [4], [10]])
         theta = np.array([[0], [2]])
         assert squared_error(x, y, theta) == 1.7 # Using previously calculated squared error (by hand)
+    
+    def test_gradient_descent(self):
+        x = np.array([[1], [2], [3], [4], [5]])
+        y = np.array([[2], [4], [6], [8], [10]])
+        output = gradient_descent(10000, 0.1, x, y) # for data sets with an exact line, the output should be that line given a proper amount of iterations and a well-chosen alpha
+        assert output[0][0] == 0 # check that the y-intercept is 0
+        assert output[1][0] == 2 # check that the slope is 2
+
+        x = np.array([[1], [2], [3], [4], [5]])
+        y = np.array([[2], [4], [5], [8], [9]])
+        output = gradient_descent(10000, 0.1, x, y) # data sets without an exact line should be within a certain tolerance (in this case, the result should always be [[0.2], [1.8]])
+        assert output[0][0] == 0.2 # check that the y-intercept is 0.2
+        assert output[1][0] == 1.8 # check that the slope is 1.8

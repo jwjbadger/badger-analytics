@@ -81,4 +81,4 @@ def gradient_descent(i, alpha, x, y): # squared error only currently
         temp1 = theta[1][0] - (alpha * (1/m) * np.sum(np.multiply(np.subtract(h, y), x)))
         theta = np.array([[temp0], [temp1]])
 
-    return theta
+    return np.round(theta, 6)
