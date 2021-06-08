@@ -4,6 +4,7 @@ requires = [
     "wheel",
     "numpy",
     "requests",
+    "pytest",
     "requires"
 ]
 build-backend = "setuptools.build_meta"
