@@ -17,11 +17,11 @@ def local_import(path):
     output : numpy array
         an array with the read data
     """
-    try:
-        raw = open(path, 'r')
-        return np.array(eval(raw.read()))
-    finally:
-        raw.close()
+    raw = open(path, 'r')
+    output = np.array(eval(raw.read()))
+    raw.close()
+
+    return output
 
 def remote_import(path):
     """
