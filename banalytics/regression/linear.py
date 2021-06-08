@@ -9,7 +9,7 @@ def squared_error(x, y, theta):
     X = np.hstack((np.ones((m,1)),x)) # x with a prepended column of ones
     h = np.dot(X, theta) # h(x)
 
-    return (1/(2*m)) * np.sum(np.power((np.subtract(h, y)), 2))
+    return np.round((1/(2*m)) * np.sum(np.power((np.subtract(h, y)), 2)), 6)
 
 def gradient_descent(i, alpha, x, y, init_theta): # squared error only currently
     theta = init_theta # set a mutatable theta
