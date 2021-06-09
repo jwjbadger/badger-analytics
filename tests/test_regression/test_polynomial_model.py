@@ -31,12 +31,10 @@ class TestPolynomialModel:
     def test_gradient_descent(self):
         x = np.array([[1], [2], [3], [4], [5]])
         y = np.array([[5], [11], [19], [29], [41]])
-        model = PolynomialModel(x, y)
-        model.gradient_descent(10000, 0.06, n=15)
+        model = PolynomialModel(x, y).gradient_descent(10000, 0.06, n=15)
         assert model.squared_error() < 0.1 # because polynomial regression is more complex, it is much less likely to converge properly
 
         x = np.array([[2, 1], [4, 2], [6, 3], [8, 4], [10, 5]])
         y = np.array([[5], [11], [19], [29], [41]])
-        model = PolynomialModel(x, y)
-        model.gradient_descent(10000, 0.03, n=15)
+        model = PolynomialModel(x, y).gradient_descent(10000, 0.03, n=15)
         assert model.squared_error() < 0.1

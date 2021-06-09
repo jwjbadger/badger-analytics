@@ -36,24 +36,22 @@ class TestLinearModel:
         x = np.array([[1], [2], [3], [4], [5]])
         y = np.array([[2], [4], [6], [8], [10]])
         output = LinearModel(x, y).gradient_descent(10000, 0.1) # for data sets with an exact line, the output should be that line given a proper amount of iterations and a well-chosen alpha
-        assert output[0][0] == 0 # check that the y-intercept is 0
-        assert output[1][0] == 2 # check that the slope is 2
+        assert output.theta[0][0] == 0 # check that the y-intercept is 0
+        assert output.theta[1][0] == 2 # check that the slope is 2
 
         x = np.array([[1], [2], [3], [4], [5]])
         y = np.array([[2], [4], [5], [8], [9]])
         output = LinearModel(x, y).gradient_descent(10000, 0.1) # data sets without an exact line should be within a certain tolerance (in this case, the result should always be [[0.2], [1.8]])
-        assert output[0][0] == 0.2 # check that the y-intercept is 0.2
-        assert output[1][0] == 1.8 # check that the slope is 1.8
+        assert output.theta[0][0] == 0.2 # check that the y-intercept is 0.2
+        assert output.theta[1][0] == 1.8 # check that the slope is 1.8
 
         x = np.array([[1, 2], [2, 4], [3, 6], [4, 8], [5, 10]])
         y = np.array([[4], [8], [12], [16], [20]])
-        model = LinearModel(x, y)
-        model.gradient_descent(10000, 0.1)
+        model = LinearModel(x, y).gradient_descent(10000, 0.1)
         assert model.squared_error() == 0 # adding another variable means there are multiple solutions, so we can't check that the solutions are the same, but we must check the squared error is 0 (because the program should come up with an exact solution)
 
         # The following test may take a long time, remove it if testing other items
         x = np.array([[3, 2], [2, 4], [3, 4], [4, 9], [5, 10]])
         y = np.array([[4], [8], [12], [16], [20]])
-        model = LinearModel(x, y)
-        model.gradient_descent(10000, 0.14, n=15) # We must loop through because this case is much less consistent to verify that the error is on average relatively good
+        model = LinearModel(x, y).gradient_descent(10000, 0.14, n=15) # We must loop through because this case is much less consistent to verify that the error is on average relatively good
         assert model.squared_error() < 2.5

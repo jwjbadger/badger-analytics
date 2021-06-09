@@ -19,7 +19,10 @@ class LinearModel:
     def __init__(self, x, y, theta=None):
         self.y = y
 
-        self.theta = theta if type(theta) == np.ndarray else self.generate(x.shape[1]+1) # Creates theta only if theta isn't a parameter
+        if type(theta) == np.ndarray:
+            self.theta = theta
+        else:
+            self.generate(x.shape[1]+1) # Creates theta only if theta isn't a parameter
         self.m = x.shape[0] # number of rows in x
         self.X = np.hstack((np.ones((self.m,1)), x)) # x with a prepended column of ones
 
@@ -36,11 +39,11 @@ class LinearModel:
 
         Returns
         -------
-        output : numpy.array
-            a 2d numpy array of the randomly generated theta matrix
+        self
         """
 
-        return np.multiply(np.random.rand(n, 1), 10)
+        self.theta = np.multiply(np.random.rand(n, 1), 10)
+        return self
 
     def squared_error(self, theta=None):
         """
@@ -82,15 +85,14 @@ class LinearModel:
 
         Returns
         -------
-        output : numpy.array
-            a 2d numpy array with the theta values optimized for the given x and y vectors
+        self
         """
 
         if n: # if n exists, we should run a loop
             best_theta = self.theta
 
             for j in range(n):
-                self.theta = self.generate(self.X.shape[1]) # regenerate theta
+                self.generate(self.X.shape[1]) # regenerate theta
                 temp = np.ndarray((self.X.shape[1], 1))
 
                 for k in range(1, it):
@@ -105,7 +107,7 @@ class LinearModel:
                     best_theta = self.theta
 
             self.theta = np.round(best_theta, 6)
-            return self.theta
+            return self
 
         temp = np.ndarray((self.X.shape[1], 1))
 
@@ -117,4 +119,4 @@ class LinearModel:
             self.theta = temp
         
         self.theta = np.round(self.theta, 6)
-        return self.theta
+        return self
