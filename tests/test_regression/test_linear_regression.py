@@ -44,3 +44,17 @@ class TestLinearRegression:
         output = gradient_descent(10000, 0.1, x, y) # data sets without an exact line should be within a certain tolerance (in this case, the result should always be [[0.2], [1.8]])
         assert output[0][0] == 0.2 # check that the y-intercept is 0.2
         assert output[1][0] == 1.8 # check that the slope is 1.8
+
+        x = np.array([[1, 2], [2, 4], [3, 6], [4, 8], [5, 10]])
+        y = np.array([[4], [8], [12], [16], [20]])
+        output = gradient_descent(10000, 0.1, x, y)
+        assert squared_error(x, y, output) == 0 # adding another variable means there are multiple solutions, so we can't check that the solutions are the same, but we must check the squared error is 0 (because the program should come up with an exact solution)
+
+        # The following test may take a long time, remove it if testing other items
+        error = np.array([])
+        for i in range(15):
+            x = np.array([[3, 2], [2, 4], [3, 4], [4, 9], [5, 10]])
+            y = np.array([[4], [8], [12], [16], [20]])
+            output = gradient_descent(10000, 0.14, x, y)
+            error = np.append(error, squared_error(x, y, output))
+        assert np.mean(error) < 3.7 # We must loop through because this case is much less consistent to verify that the error is on average relatively good

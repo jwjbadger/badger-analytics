@@ -51,7 +51,7 @@ def gradient_descent(i, alpha, x, y): # squared error only currently
     """
     gradient_descent(i, alpha, x, y, init_theta)
 
-    Runs gradient descent on a specific x and y vector with i iterations and a learning rate, alpha.
+    Runs gradient descent on a specific x matrix and y vector with i iterations and a learning rate, alpha.
 
     Parameters
     ----------
@@ -70,15 +70,15 @@ def gradient_descent(i, alpha, x, y): # squared error only currently
         a 2d numpy array with the theta values optimized for the given x and y vectors
     """
 
-    theta = generate(2) # set an initial theta vector
+    theta = generate(x.shape[1] + 1) # set an initial theta vector
     m = x.shape[0] # number of rows in x
     X = np.hstack((np.ones((m,1)),x)) # x with a prepended column of ones
+    temp = np.ndarray((x.shape[1] + 1, 1))
 
     for i in range(1, i):
         h = np.dot(X, theta) # h(x)
 
-        temp0 = theta[0][0] - (alpha * (1/m) * np.sum(np.subtract(h, y)))
-        temp1 = theta[1][0] - (alpha * (1/m) * np.sum(np.multiply(np.subtract(h, y), x)))
-        theta = np.array([[temp0], [temp1]])
-
+        for i in range(temp.shape[1] + 1):
+            temp[i][0] = theta[i][0] - (alpha * (1/m) * np.sum(np.multiply(np.subtract(h, y), X[:,[i]])))
+        theta = temp
     return np.round(theta, 6)
