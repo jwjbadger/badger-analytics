@@ -1,10 +1,11 @@
 import numpy as np
 
-class LinearModel:
+class PolynomialModel:
     """
-    __init__(self, x, y, theta=None)
+    __init__(self, x, y, theta=None, degree=2)
 
-    A class for linear regression models, Takes in an x matrix and y vector to use for a variety of regression functions.
+    A class for polynomial regression models, Takes in an x matrix and y vector to use for a variety of regression functions. The x matrix should be arranged so the first column will be put to the power of 1, the second 2, and so on if you wish for a seperate feature to be a seperate power.
+    If the x is a vector, features will automatically be generated up to the desired degree (default is two), otherwise, the degree and number of columns in x should match so that each feature can be to the correct power.
 
     Parameters
     ----------
@@ -14,14 +15,29 @@ class LinearModel:
         the y matrix
     theta : numpy.array, optional
         the theta vector
+    degree : int, optional
+        the degree to which the function should reach (should only be used if x is a vector)
     """
 
-    def __init__(self, x, y, theta=None):
+    def __init__(self, x, y, theta=None, degree=2):
+        if x.shape[1] > 1:
+            self.degree = x.shape[1] # degree should be ignored if x isn't a vector
+        else:
+            self. degree = degree
+
         self.y = y
 
-        self.theta = theta if type(theta) == np.ndarray else self.generate(x.shape[1]+1) # Creates theta only if theta isn't a parameter
+        self.theta = theta if type(theta) == np.ndarray else self.generate(self.degree+1) # Creates theta only if theta isn't a parameter
         self.m = x.shape[0] # number of rows in x
-        self.X = np.hstack((np.ones((self.m,1)), x)) # x with a prepended column of ones
+        self.X = np.ndarray((x.shape[0], self.degree + 1))
+
+        if x.shape[1] == 1:
+            for i in range(0, self.degree + 1):
+                self.X[:,[i]] = np.power(x[:,[0]], i)
+        else:
+            for i in range(1, self.degree + 1):
+                self.X[:,[i]] = np.power(x[:,[i-1]], i)
+            self.X[:,[0]] = np.ones((x.shape[0], 1))
 
     def generate(self, n):
         """

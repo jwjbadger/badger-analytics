@@ -1,1 +1,2 @@
-from . import linear
+from .linear import *
+from .polynomial import *
