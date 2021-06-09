@@ -1,4 +1,4 @@
-from banalytics.regression.linear import *
+from banalytics.regression import LinearModel
 import numpy as np
 
 class TestLinearModel:
@@ -56,4 +56,4 @@ class TestLinearModel:
         y = np.array([[4], [8], [12], [16], [20]])
         model = LinearModel(x, y)
         model.gradient_descent(10000, 0.14, n=15) # We must loop through because this case is much less consistent to verify that the error is on average relatively good
-        assert model.squared_error() < 2.1 
+        assert model.squared_error() < 2.5
