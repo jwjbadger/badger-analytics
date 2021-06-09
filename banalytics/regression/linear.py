@@ -2,7 +2,7 @@ import numpy as np
 
 # generates theta vector 
 def generate(n):
-    r"""
+    """
     generate(n)
 
     Generates a random theta vector of size n with a uniform distribution over [0, 10).
@@ -21,7 +21,7 @@ def generate(n):
     return np.multiply(np.random.rand(n, 1), 10)
 
 def squared_error(x, y, theta):
-    r"""
+    """
     squared_error(x, y, theta)
 
     Gives the squared error for given x and y vectors and a theta vector.
@@ -48,7 +48,7 @@ def squared_error(x, y, theta):
     return np.round((1/(2*m)) * np.sum(np.power((np.subtract(h, y)), 2)), 6)
 
 def gradient_descent(i, alpha, x, y): # squared error only currently
-    r"""
+    """
     gradient_descent(i, alpha, x, y, init_theta)
 
     Runs gradient descent on a specific x and y vector with i iterations and a learning rate, alpha.
