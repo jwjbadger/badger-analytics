@@ -21,6 +21,16 @@ class TestLinearRegression:
         y = np.array([[2], [5], [6], [4], [10]])
         theta = np.array([[0], [2]])
         assert squared_error(x, y, theta) == 1.7 # Using previously calculated squared error (by hand)
+
+        x = np.array([[1, 2], [2, 4], [3, 6], [4, 8], [5, 10]])
+        y = np.array([[4], [8], [12], [16], [20]])
+        theta = np.array([[0], [2], [1]])
+        assert squared_error(x, y, theta) == 0 # Squared error of equal functions and lists should be 0 (squared error should work for matrices)
+
+        x = np.array([[3, 2], [2, 4], [3, 4], [4, 9], [5, 10]])
+        y = np.array([[4], [8], [12], [16], [20]])
+        theta = np.array([[0], [2], [1]])
+        assert squared_error(x, y, theta) == 2.1 # Using previously calculated squared error (by hand) (squared error should work for matrices)
     
     def test_gradient_descent(self):
         x = np.array([[1], [2], [3], [4], [5]])

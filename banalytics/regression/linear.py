@@ -24,12 +24,12 @@ def squared_error(x, y, theta):
     """
     squared_error(x, y, theta)
 
-    Gives the squared error for given x and y vectors and a theta vector.
+    Gives the squared error for the given x matrix, y vector and theta vector.
 
     Parameters
     ----------
     x : numpy.array
-        a 2d numpy array that holds the x values as a vector
+        a 2d numpy array that holds the x values as a matrix
     y : numpy.array
         a 2d numpy array that holds the y values as a vector
     theta : numpy.array
