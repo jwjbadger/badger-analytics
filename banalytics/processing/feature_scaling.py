@@ -45,10 +45,10 @@ def normalize(input):
     """
     if input.shape[1] == 1:
         i = input.T
-        return np.round((i-min(i))/(max(i)-min(i)), 6).T
+        return np.round((i-np.min(i))/(np.max(i)-np.min(i)), 6).T
     else:
         result = np.hsplit(input, input.shape[1]) # Split the input into it's columns
         for i in range(len(result)): # Iterate through each column
             col = result[i] # Create a variable which stores the column
-            result[i] = (col-min(col))/(max(col)-min(col)) # Set the ith column in the result to the normalization of the ith column
+            result[i] = (col-np.min(col))/(np.max(col)-np.min(col)) # Set the ith column in the result to the normalization of the ith column
         return np.round(np.hstack(result), 6) # Stack the columns properly
