@@ -120,3 +120,17 @@ class LinearModel:
         
         self.theta = np.round(self.theta, 6)
         return self
+    
+    def normal(self):
+        """
+        normal(self)
+
+        Runs a normal equation on X and y to create a theta matrix. This is extremely consistent and willl give good results within good times for roughly m < 10000 (m is the number of training examples in X).
+
+        Returns
+        -------
+        self
+        """
+
+        self.theta = np.round(np.dot(np.dot(np.linalg.pinv(np.dot(self.X.T, self.X)), self.X.T), self.y), 6)
+        return self

@@ -138,3 +138,7 @@ class PolynomialModel:
         
         self.theta = np.round(self.theta, 6)
         return self
+    
+    def normal(self):
+        self.theta = np.round(np.dot(np.dot(np.linalg.pinv(np.dot(self.X.T, self.X)), self.X.T), self.y), 6)
+        return self
