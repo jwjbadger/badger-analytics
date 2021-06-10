@@ -55,3 +55,26 @@ class TestLinearModel:
         y = np.array([[4], [8], [12], [16], [20]])
         model = LinearModel(x, y).gradient_descent(10000, 0.14, n=15) # We must loop through because this case is much less consistent to verify that the error is on average relatively good
         assert model.squared_error() < 2.5
+    
+    def test_normal(self):
+        x = np.array([[1], [2], [3], [4], [5]])
+        y = np.array([[2], [4], [6], [8], [10]])
+        output = LinearModel(x, y).normal() 
+        assert output.theta[0][0] == 0 # check that the y-intercept is 0
+        assert output.theta[1][0] == 2 # check that the slope is 2
+
+        x = np.array([[1], [2], [3], [4], [5]])
+        y = np.array([[2], [4], [5], [8], [9]])
+        output = LinearModel(x, y).normal()
+        assert output.theta[0][0] == 0.2 # check that the y-intercept is 0.2
+        assert output.theta[1][0] == 1.8 # check that the slope is 1.8
+
+        x = np.array([[1, 2], [2, 4], [3, 6], [4, 8], [5, 10]])
+        y = np.array([[4], [8], [12], [16], [20]])
+        model = LinearModel(x, y).normal()
+        assert model.squared_error() == 0
+
+        x = np.array([[3, 2], [2, 4], [3, 4], [4, 9], [5, 10]])
+        y = np.array([[4], [8], [12], [16], [20]])
+        model = LinearModel(x, y).normal() # Normal equations are extremely consistent (as nothing changes between runs), so we can use exact values for squared error
+        assert model.squared_error() == 1.483558

@@ -38,3 +38,14 @@ class TestPolynomialModel:
         y = np.array([[5], [11], [19], [29], [41]])
         model = PolynomialModel(x, y).gradient_descent(10000, 0.03, n=15)
         assert model.squared_error() < 0.1
+
+    def test_normal(self):
+        x = np.array([[1], [2], [3], [4], [5]])
+        y = np.array([[5], [11], [19], [29], [41]])
+        model = PolynomialModel(x, y).normal()
+        assert model.squared_error() == 0
+
+        x = np.array([[2, 1], [4, 2], [6, 3], [8, 4], [10, 5]])
+        y = np.array([[5], [11], [19], [29], [41]])
+        model = PolynomialModel(x, y).normal()
+        assert model.squared_error() == 0
